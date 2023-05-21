@@ -1,4 +1,4 @@
-package com.example.initial_app
+package com.undigitally.undigitally
 
 import io.flutter.embedding.android.FlutterActivity
 

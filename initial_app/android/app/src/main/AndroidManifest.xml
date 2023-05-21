@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.initial_app">
+    package="com.undigitally.undigitally">
    <application
-        android:label="initial_app"
+        android:label="undigitally"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
