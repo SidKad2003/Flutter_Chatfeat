@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "849662432906",
+    "project_id": "undigitally-d1bfc",
+    "storage_bucket": "undigitally-d1bfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849662432906:android:bd33577374975fb406ff73",
+        "android_client_info": {
+          "package_name": "com.undigitally.undigitally"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849662432906-jt1n0k0vrkkkvalu478urf4iftcjsfd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_m3M6WoFbToLe9-F6P5gGYaaAj0F8v4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849662432906-jt1n0k0vrkkkvalu478urf4iftcjsfd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

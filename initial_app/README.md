@@ -1,3 +1,3 @@
-# initial_app
+# undigitally
 
-A new Flutter project.
+Undigitally Initialized with firebase.
