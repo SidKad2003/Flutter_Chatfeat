@@ -63,63 +63,14 @@ class _SignUpState extends State<SignUp> {
                         height: 15,
                       ),
                       TextField(
-                        cursorColor: Color.fromARGB(175, 0, 0, 0),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: const Color.fromARGB(102, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1, color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1.5,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          labelText: 'Enter Your Username',
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(178, 0, 0, 0),
-                              fontSize: 16,
-                              fontFamily: GoogleFonts.poppins().fontFamily),
-                        ),
-                      ),
+                          cursorColor: Color.fromARGB(175, 0, 0, 0),
+                          decoration: decoration('Username')),
                       const SizedBox(
                         height: 11,
                       ),
                       TextField(
                         cursorColor: Color.fromARGB(175, 0, 0, 0),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: const Color.fromARGB(102, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1, color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1.5,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          labelText: 'Enter Your Email',
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(178, 0, 0, 0),
-                              fontSize: 16,
-                              fontFamily: GoogleFonts.poppins().fontFamily),
-                        ),
+                        decoration: decoration('Email'),
                       ),
                       const SizedBox(
                         height: 11,
@@ -127,31 +78,7 @@ class _SignUpState extends State<SignUp> {
                       TextField(
                         keyboardType: TextInputType.number,
                         cursorColor: Color.fromARGB(175, 0, 0, 0),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: const Color.fromARGB(102, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1, color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1.5,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          labelText: 'Enter Your Phone Number',
-                          labelStyle: TextStyle(
-                              color: Color.fromARGB(178, 0, 0, 0),
-                              fontSize: 16,
-                              fontFamily: GoogleFonts.poppins().fontFamily),
-                        ),
+                        decoration: decoration('Phone Number'),
                       ),
                       const SizedBox(
                         height: 11,
@@ -323,6 +250,30 @@ class _SignUpState extends State<SignUp> {
           ),
         )
       ],
+    );
+  }
+
+  InputDecoration decoration(String label) {
+    return InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: const Color.fromARGB(102, 0, 0, 0)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 1, color: Color.fromARGB(255, 0, 0, 0)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 1.5, color: Color.fromARGB(255, 0, 0, 0)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      labelText: 'Enter You ${label}',
+      labelStyle: TextStyle(
+          color: Color.fromARGB(178, 0, 0, 0),
+          fontSize: 16,
+          fontFamily: GoogleFonts.poppins().fontFamily),
     );
   }
 }
