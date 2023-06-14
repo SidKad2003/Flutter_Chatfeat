@@ -1,26 +1,87 @@
 {
   "project_info": {
-    "project_number": "812345376989",
-    "project_id": "undigitally-auth",
-    "storage_bucket": "undigitally-auth.appspot.com"
+    "project_number": "849662432906",
+    "project_id": "undigitally-d1bfc",
+    "storage_bucket": "undigitally-d1bfc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:812345376989:android:43839023ff5fa48d6ddb34",
+        "mobilesdk_app_id": "1:849662432906:android:40443102ba01b45506ff73",
         "android_client_info": {
           "package_name": "com.example.sign_up_login"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "849662432906-1f9i4joblbmhglj50p5v3t0rp9932hj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyChroac-D-4ZOqdhpMOSsd99NfJfvSpQ-U"
+          "current_key": "AIzaSyAB_m3M6WoFbToLe9-F6P5gGYaaAj0F8v4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849662432906-1f9i4joblbmhglj50p5v3t0rp9932hj4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "849662432906-697s3eed91ad49e40k8nlha2e6qc6l42.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.signUpLogin.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849662432906:android:bd33577374975fb406ff73",
+        "android_client_info": {
+          "package_name": "com.undigitally.undigitally"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849662432906-72vho0d07lpev14d78pve62udk96ffqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.undigitally.undigitally",
+            "certificate_hash": "765dd23a6411cbd6fb2290bfab96e2ace8d1ae31"
+          }
+        },
+        {
+          "client_id": "849662432906-1f9i4joblbmhglj50p5v3t0rp9932hj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_m3M6WoFbToLe9-F6P5gGYaaAj0F8v4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849662432906-1f9i4joblbmhglj50p5v3t0rp9932hj4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "849662432906-697s3eed91ad49e40k8nlha2e6qc6l42.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.signUpLogin.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
