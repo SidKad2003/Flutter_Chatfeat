@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sign_up_login/login_page.dart';
-import 'package:sign_up_login/utils.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sign_up_login/main.dart';
@@ -23,17 +21,17 @@ class _SignUpState extends State<SignUp> {
   bool passwordEye = true;
   IconData passwordIcon = Icons.remove_red_eye;
 
-  final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneNumberController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    phoneNumberController.dispose();
-    passwordController.dispose();
+    _usernameController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -43,10 +41,10 @@ class _SignUpState extends State<SignUp> {
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator()));
 
-    final String email = emailController.text.trim();
-    final String password = passwordController.text.trim();
-    final String userName = usernameController.text.trim();
-    final String phone = phoneNumberController.text.trim();
+    final String email = _emailController.text.trim();
+    final String password = _passwordController.text.trim();
+    final String userName = _usernameController.text.trim();
+    final String phone = _phoneNumberController.text.trim();
 
     if (userName.isEmpty) {
       Fluttertoast.showToast(
@@ -65,19 +63,6 @@ class _SignUpState extends State<SignUp> {
       Navigator.pop(context);
       return;
     }
-
-    (currentUserName) async {
-      try {
-// if the size of value is greater then 0 then that doc exist.
-        await FirebaseFirestore.instance
-            .collection('Users')
-            .where('email', isEqualTo: email)
-            .get()
-            .then((value) => value.size > 0 ? true : false);
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-    };
 
     if (phone.isEmpty || !isValidPhNum(phone)) {
       Fluttertoast.showToast(
@@ -225,14 +210,14 @@ class _SignUpState extends State<SignUp> {
                       height: 15,
                     ),
                     TextField(
-                        controller: usernameController,
+                        controller: _usernameController,
                         cursorColor: Color.fromARGB(175, 0, 0, 0),
                         decoration: decoration('Username')),
                     const SizedBox(
                       height: 11,
                     ),
                     TextField(
-                      controller: emailController,
+                      controller: _emailController,
                       cursorColor: Color.fromARGB(175, 0, 0, 0),
                       decoration: decoration('Email'),
                     ),
@@ -240,7 +225,7 @@ class _SignUpState extends State<SignUp> {
                       height: 11,
                     ),
                     TextField(
-                      controller: phoneNumberController,
+                      controller: _phoneNumberController,
                       keyboardType: TextInputType.number,
                       cursorColor: Color.fromARGB(175, 0, 0, 0),
                       decoration: decoration('Phone Number'),
@@ -254,7 +239,7 @@ class _SignUpState extends State<SignUp> {
                           _passwordError = validatePassword(value);
                         });
                       },
-                      controller: passwordController,
+                      controller: _passwordController,
                       obscureText: passwordEye,
                       cursorColor: Color.fromARGB(175, 0, 0, 0),
                       decoration: InputDecoration(
