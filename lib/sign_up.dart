@@ -26,6 +26,11 @@ class _SignUpState extends State<SignUp> {
   final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String? _usernameError;
+  String? _emailError;
+  String? _phoneNumberError;
+  String? _passwordError;
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -33,6 +38,22 @@ class _SignUpState extends State<SignUp> {
     _phoneNumberController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  bool detailsAreCorrect(
+      String userName, String email, String phone, String password) {
+    if (_usernameError != null ||
+        _emailError != null ||
+        _phoneNumberError != null ||
+        _passwordError != null) {
+      Fluttertoast.showToast(
+          msg: 'Please enter valid details',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR);
+      Navigator.pop(context);
+      return false;
+    }
+    return true;
   }
 
   Future signUpUsingMail() async {
@@ -46,39 +67,7 @@ class _SignUpState extends State<SignUp> {
     final String userName = _usernameController.text.trim();
     final String phone = _phoneNumberController.text.trim();
 
-    if (userName.isEmpty) {
-      Fluttertoast.showToast(
-          msg: 'Username is empty',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR);
-      Navigator.pop(context);
-      return;
-    }
-
-    if (email.isEmpty || !isValidEmail(email)) {
-      Fluttertoast.showToast(
-          msg: 'Invalid email address',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR);
-      Navigator.pop(context);
-      return;
-    }
-
-    if (phone.isEmpty || !isValidPhNum(phone)) {
-      Fluttertoast.showToast(
-          msg: 'Invalid Phone Number',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR);
-      Navigator.pop(context);
-      return;
-    }
-
-    if (password.isEmpty) {
-      Fluttertoast.showToast(
-          msg: 'Password cant be Empty',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR);
-      Navigator.pop(context);
+    if (!detailsAreCorrect(userName, email, phone, password)) {
       return;
     }
 
@@ -135,8 +124,6 @@ class _SignUpState extends State<SignUp> {
     return phoneRegex.hasMatch(phone);
   }
 
-  String? _passwordError;
-
   String? validatePassword(String password) {
     // Check if the password is at least 8 characters long
     if (password.length < 6) {
@@ -164,6 +151,43 @@ class _SignUpState extends State<SignUp> {
     }
 
     return null; // Return null if the password is valid
+  }
+
+  String? validateEmail(String email) {
+    // Check if the email is empty
+    if (email.isEmpty) {
+      return 'Email is empty';
+    }
+
+    // Check if the email is valid
+    if (!isValidEmail(email)) {
+      return 'Invalid email address';
+    }
+
+    return null; // Return null if the email is valid
+  }
+
+  String? validatePhone(String phone) {
+    // Check if the phone number is empty
+    if (phone.isEmpty) {
+      return 'Phone number is empty';
+    }
+
+    // Check if the phone number is valid
+    if (!isValidPhNum(phone)) {
+      return 'Invalid phone number';
+    }
+
+    return null; // Return null if the phone number is valid
+  }
+
+  String? validateUsername(String username) {
+    // Check if the username is empty
+    if (username.isEmpty) {
+      return 'Username is empty';
+    }
+
+    return null; // Return null if the username is valid
   }
 
   @override
@@ -210,25 +234,26 @@ class _SignUpState extends State<SignUp> {
                       height: 15,
                     ),
                     TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            _usernameError = validateUsername(value);
+                          });
+                        },
                         controller: _usernameController,
                         cursorColor: Color.fromARGB(175, 0, 0, 0),
-                        decoration: decoration('Username')),
+                        decoration: decoration('Username', _usernameError)),
                     const SizedBox(
                       height: 11,
                     ),
                     TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          _emailError = validateEmail(value);
+                        });
+                      },
                       controller: _emailController,
                       cursorColor: Color.fromARGB(175, 0, 0, 0),
-                      decoration: decoration('Email'),
-                    ),
-                    const SizedBox(
-                      height: 11,
-                    ),
-                    TextField(
-                      controller: _phoneNumberController,
-                      keyboardType: TextInputType.number,
-                      cursorColor: Color.fromARGB(175, 0, 0, 0),
-                      decoration: decoration('Phone Number'),
+                      decoration: decoration('Email', _emailError),
                     ),
                     const SizedBox(
                       height: 11,
@@ -236,7 +261,25 @@ class _SignUpState extends State<SignUp> {
                     TextField(
                       onChanged: (value) {
                         setState(() {
-                          _passwordError = validatePassword(value);
+                          _phoneNumberError = validatePhone(value);
+                        });
+                      },
+                      controller: _phoneNumberController,
+                      keyboardType: TextInputType.number,
+                      cursorColor: Color.fromARGB(175, 0, 0, 0),
+                      decoration: decoration('Phone Number', _phoneNumberError),
+                    ),
+                    const SizedBox(
+                      height: 11,
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          if (value.isEmpty) {
+                            _passwordError = 'Password can\'t be Empty';
+                          } else {
+                            _passwordError = validatePassword(value);
+                          }
                         });
                       },
                       controller: _passwordController,
@@ -406,8 +449,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  InputDecoration decoration(String label) {
+  InputDecoration decoration(String label, String? errorText) {
     return InputDecoration(
+      errorText: errorText,
       filled: true,
       fillColor: Colors.white,
       border: OutlineInputBorder(
