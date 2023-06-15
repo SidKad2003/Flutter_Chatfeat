@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.greenAccent,
         body: Stack(fit: StackFit.expand, children: [
           Image.asset(
-            'assests/img/Signup-Page-Background.png',
+            'assests/img/Signup Page Background.png',
             fit: BoxFit.cover,
           ),
           SingleChildScrollView(

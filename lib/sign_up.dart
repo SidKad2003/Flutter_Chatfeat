@@ -56,6 +56,20 @@ class _SignUpState extends State<SignUp> {
     return true;
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<bool> isEmailExists(String email) async {
+    try {
+      // Use the fetchSignInMethodsForEmail() method to check if the email exists
+      var methods = await _auth.fetchSignInMethodsForEmail(email);
+
+      // If the email exists, the methods list will not be empty
+      return methods.isNotEmpty;
+    } catch (e) {
+      print('Error checking email existence: $e');
+      return false;
+    }
+  }
+
   Future signUpUsingMail() async {
     showDialog(
         context: context,
@@ -72,10 +86,43 @@ class _SignUpState extends State<SignUp> {
     }
 
     try {
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('sign_up')
+          .where('phone', isEqualTo: phone)
+          .get();
+      final List<DocumentSnapshot> documents = result.docs;
+      if (documents.isNotEmpty) {
+        Fluttertoast.showToast(
+            msg: 'Mobile Number already exists, try logging in!',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.SNACKBAR);
+        Navigator.pop(context);
+        return;
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: 'Some error occured, please try again later',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR);
+      Navigator.pop(context);
+      return;
+    }
+
+    try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      bool exists = await isEmailExists(email);
+      if (exists) {
+        Fluttertoast.showToast(
+            msg: 'Email already exists, try logging in!',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.SNACKBAR);
+
+        Navigator.pop(context);
+        return;
+      }
+
       Fluttertoast.showToast(
           msg: 'Some error occured, please try again later',
           toastLength: Toast.LENGTH_SHORT,
@@ -90,9 +137,7 @@ class _SignUpState extends State<SignUp> {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         'username': userName,
-        'email': email,
         'phone': phone,
-        'password': password,
       });
     } catch (e) {
       Fluttertoast.showToast(
