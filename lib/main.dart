@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_up_login/firebase_options.dart';
-import 'package:sign_up_login/login_page.dart';
-import 'package:sign_up_login/home_page.dart';
 import 'package:sign_up_login/sign_up.dart';
+import 'package:sign_up_login/verify_email.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.green),
       // home: LoginPage(),
       home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
@@ -43,13 +42,11 @@ class MyApp extends StatelessWidget {
               );
             } */
             if (snapshot.hasData) {
-              return HomePage();
+              return VerifyEmail();
             } else {
-              //return SignUp();
               return SignUp();
             }
           }),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
