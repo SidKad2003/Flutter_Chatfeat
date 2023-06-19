@@ -98,8 +98,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   ),
                   const SizedBox(height: 50),
                   ElevatedButton(
-                    //onPressed: sentVerificationEmail,
-                    onPressed: () {},
+                    onPressed: sentVerificationEmail,
                     child: const Text('Resend verification email'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith(
@@ -114,8 +113,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      //FirebaseAuth.instance.currentUser!.delete();
-                      //Navigator.pop(context);
+                      FirebaseAuth.instance.currentUser!.delete();
+                      Navigator.pop(context);
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith(
