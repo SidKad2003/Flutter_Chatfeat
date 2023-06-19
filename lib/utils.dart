@@ -140,3 +140,128 @@ AppBar topBar(String title, BuildContext context, String image) {
     ),
   );
 }
+
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
+
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  Color homebg = Colors.transparent;
+  Color messagebg = Colors.transparent;
+  Color createbg = Color.fromARGB(255, 46, 119, 0);
+  Color searchbg = Colors.transparent;
+  Color notifybg = Colors.transparent;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: homebg,
+                child: const Icon(Icons.home_filled,
+                    color: Colors.black, size: 30),
+              ),
+              onTap: () {
+                setState(() {
+                  homebg = Color.fromARGB(255, 128, 225, 66);
+                  messagebg = Colors.transparent;
+                  createbg = Color.fromARGB(255, 46, 119, 0);
+                  searchbg = Colors.transparent;
+                  notifybg = Colors.transparent;
+                });
+              },
+            ),
+            GestureDetector(
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: messagebg,
+                child: const Icon(Icons.message, color: Colors.black, size: 30),
+              ),
+              onTap: () {
+                setState(() {
+                  homebg = Colors.transparent;
+                  messagebg = Color.fromARGB(255, 128, 225, 66);
+                  createbg = Color.fromARGB(255, 46, 119, 0);
+                  searchbg = Colors.transparent;
+                  notifybg = Colors.transparent;
+                });
+              },
+            ),
+            GestureDetector(
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: createbg,
+                child: const Icon(Icons.add, size: 30, color: Colors.white),
+              ),
+              onTap: () {
+                setState(() {
+                  homebg = Colors.transparent;
+                  messagebg = Colors.transparent;
+                  createbg = Color.fromARGB(255, 101, 207, 33);
+                  searchbg = Colors.transparent;
+                  notifybg = Colors.transparent;
+                });
+              },
+            ),
+            GestureDetector(
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: searchbg,
+                child: const Icon(Icons.search, color: Colors.black, size: 30),
+              ),
+              onTap: () {
+                setState(() {
+                  homebg = Colors.transparent;
+                  messagebg = Colors.transparent;
+                  createbg = Color.fromARGB(255, 46, 119, 0);
+                  searchbg = Color.fromARGB(255, 128, 225, 66);
+                  notifybg = Colors.transparent;
+                });
+              },
+            ),
+            GestureDetector(
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: notifybg,
+                child: const Icon(Icons.notifications,
+                    color: Colors.black, size: 30),
+              ),
+              onTap: () {
+                setState(() {
+                  homebg = Colors.transparent;
+                  messagebg = Colors.transparent;
+                  createbg = Color.fromARGB(255, 46, 119, 0);
+                  searchbg = Colors.transparent;
+                  notifybg = Color.fromARGB(255, 128, 225, 66);
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
