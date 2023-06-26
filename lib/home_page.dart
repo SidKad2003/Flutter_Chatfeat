@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sign_up_login/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sign_up_login/Chat_Components/Screens/HomeScreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 : page == 2
                     ? const Create()
                     : page == 3
-                        ? const Search()
+                        ? HomeScreen()
                         : page == 4
                             ? const Notifications()
                             : page == 5
@@ -66,9 +67,11 @@ class Home extends StatelessWidget {
 class Chat extends StatelessWidget {
   const Chat({super.key});
 
+// HERE!!!HERE!!!HERE!!!HERE!!!HERE!!!HERE!!!HERE!!!HERE!!!
+
   @override
   Widget build(BuildContext context) {
-    return Text('Chat');
+    return Text('Chakldaslkdjt');
   }
 }
 

@@ -138,6 +138,7 @@ class _SignUpState extends State<SignUp> {
           .set({
         'username': userName,
         'phone': phone,
+        'status': "unvailable",
       });
     } catch (e) {
       Fluttertoast.showToast(
