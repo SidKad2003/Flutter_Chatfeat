@@ -87,7 +87,7 @@ class _SignUpState extends State<SignUp> {
 
     try {
       final QuerySnapshot result = await FirebaseFirestore.instance
-          .collection('sign_up')
+          .collection('users')
           .where('phone', isEqualTo: phone)
           .get();
       final List<DocumentSnapshot> documents = result.docs;
@@ -133,12 +133,14 @@ class _SignUpState extends State<SignUp> {
 
     try {
       await FirebaseFirestore.instance
-          .collection('sign_up')
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         'username': userName,
         'phone': phone,
         'status': "unvailable",
+        'email':email,
+        'password':password,
       });
     } catch (e) {
       Fluttertoast.showToast(

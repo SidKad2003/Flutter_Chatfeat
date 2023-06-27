@@ -4,6 +4,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_up_login/Chat_Components/Screens/ChatRoom.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -58,22 +59,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     });
 
     await _firestore
-        .collection('sign_up')
-        .where("email", isEqualTo: _search.text)
+        .collection('users')
+        .where(
+          "email",
+          isEqualTo: _search.text,
+        )
         .get()
         .then((value) {
       setState(() {
         userMap = value.docs[0].data();
         isLoading = false;
-      }
-      );
+      });
       print(value);
       print("1");
-      print(userMap);
+      print(userMap!['email']);
       print("2");
       print(value.docs[0].data());
       print("3");
       print(value.docs[0]);
+      print( userMap!['email']);
+      print(_auth.currentUser!.email!);
+
     });
   }
 
@@ -131,22 +137,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 userMap != null
                     ? ListTile(
-                      title: Text(userMap!['email']),
-                      subtitle: Text(userMap?['email']),
-                        // onTap: () {
-                        //   String roomId = chatRoomId(
-                        //       _auth.currentUser!.displayName!,
-                        //       userMap!['name']);
+                        title: Text(userMap!['email']),
+                        subtitle: Text(userMap?['username']),
+                        onTap: () {
+                          if (userMap != null) {
+                            String roomId = chatRoomId(
+                              _auth.currentUser!.email!,
+                              userMap!['email'],
+                            );
 
-                        //   // Navigator.of(context).push(
-                        //   //   MaterialPageRoute(
-                        //   //     builder: (_) => ChatRoom(
-                        //   //       chatRoomId: roomId,
-                        //   //       userMap: userMap!,
-                        //   //     ),
-                        //   //   ),
-                        //   // );
-                        // },
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ChatRoom(
+                                  chatRoomId: roomId,
+                                  userMap: userMap!,
+                                ),
+                              ),
+                            );
+                          }
+                        },
                         leading: Icon(Icons.account_box, color: Colors.black),
                         // title: Text(
                         //   userMap!['name'],
